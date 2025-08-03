@@ -6,14 +6,14 @@ const data = {
       nombre: "Homer",
       apellido: "Simpson",
       ocupacion: "Nuclear Safety Inspector",
-      imagen_url: "img/homer.png",
+      imagen_url: "img/Homer.png",
     },
 
     {
       nombre: "Marge",
       apellido: "Bouvier",
       ocupacion: "Homemaker",
-      imagen_url: "img/marge.png",
+      imagen_url: "img/Marge.png",
     },
 
     {
@@ -33,7 +33,7 @@ const data = {
       nombre: "Maggie",
       apellido: "Simpson",
       ocupacion: "Baby",
-      imagen_url: "img/maggie.png",
+      imagen_url: "img/Maggie.png",
     },
   ],
 };
