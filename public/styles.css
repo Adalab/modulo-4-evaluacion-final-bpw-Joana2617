@@ -1,26 +1,45 @@
 body {
   font-family: "Segoe UI", sans-serif;
   padding: 2rem;
-  background-image: url("img/cover.jpg");
+  background-image: url("img/cloud.jpg");
+  background-size: cover;
+
   text-align: center;
+  color: #9c8312;
 }
 
-.btn-carregar {
+.btn-load {
   background-color: #be9e0e;
   border: none;
   padding: 0.6rem 1.2rem;
   font-size: 1rem;
   cursor: pointer;
   border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+.btn-load:hover {
+  background-color: #fbc02d;
 }
 
+#lista-personagens {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
 #lista-personagens li {
-  margin: 1rem auto;
   background-color: #f57c00;
   color: white;
   padding: 0.8rem;
   width: 300px;
   border-radius: 6px;
+  transition: transform 0.3s ease;
+}
+#lista-personagens li:hover {
+  transform: scale(1.05);
 }
 
 .card {
@@ -30,28 +49,30 @@ body {
   border: 2px solid #ffcc00;
   border-radius: 8px;
   padding: 10px;
-  margin-bottom: 10px;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.card:hover {
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.25);
+  transform: translateY(-4px);
 }
 
-.personagem-img {
-  width: 80px;
-  margin-right: 12px;
-  border-radius: 5px;
-}
-
-.info {
-  font-family: "Comic Sans MS", cursive, sans-serif;
-}
-
+.personagem-img,
 .character-img {
   width: 100px;
   height: 100px;
   object-fit: cover;
+  margin-right: 12px;
   border-radius: 8px;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.info {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  text-align: left;
 }
 
 .characters {
   background-image: url("img/cloud.jpg");
+  background-size: cover;
+  background-position: center;
 }

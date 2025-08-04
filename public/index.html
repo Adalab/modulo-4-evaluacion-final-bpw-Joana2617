@@ -8,11 +8,27 @@
   </head>
   <body>
     <h1>Welcome to Springfield – Simpsons API! 🍩</h1>
+
     <p>Click below to meet the characters:</p>
     <a href="characters.html">
-      <button id="btn-load">Show Characters</button>
+      <button class="btn-load">Show Characters</button>
     </a>
-
-    <script src="script.js"></script>
+    <script>
+      fetch("/personajes")
+        .then((res) => res.json())
+        .then((data) => {
+          const galeria = document.getElementById("galeria");
+          data.simpsons.forEach((p) => {
+            const div = document.createElement("div");
+            div.className = "card";
+            div.innerHTML = `
+            <img src="img/${p.nombre.toLowerCase()}.jpg" alt="${p.nombre}" />
+            <h3>${p.nombre} ${p.apellido}</h3>
+            <p>${p.ocupacion || "Sem ocupação"}</p>
+          `;
+            galeria.appendChild(div);
+          });
+        });
+    </script>
   </body>
 </html>

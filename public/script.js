@@ -1,44 +1,42 @@
 const btn = document.getElementById("btn-carregar");
 const lista = document.getElementById("lista-personagens");
 
-const data = {
-  simpsons: [
-    {
-      nombre: "Homer",
-      apellido: "Simpson",
-      ocupacion: "Operador de usina",
-      imagen_url: "img/homer.png",
-    },
-    {
-      nombre: "Lisa",
-      apellido: "Simpson",
-      ocupacion: "Estudante",
-      imagen_url: "img/lisa.png",
-    },
-    {
-      nombre: "Bart",
-      apellido: "Simpson",
-      ocupacion: "Estudante",
-      imagen_url: "img/bart.png",
-    },
-  ],
-};
+const list = document.getElementById("character-list");
 
-btn.addEventListener("click", () => {
-  lista.innerHTML = ""; // Limpa antes de adicionar novos
-  data.simpsons.forEach((personagem) => {
-    const item = document.createElement("li");
-    item.innerHTML = `
-      <div class="card">
-        <img src="${personagem.imagen_url}" alt="${
-      personagem.nombre
-    }" class="personagem-img">
-        <div class="info">
-          <strong>${personagem.nombre} ${personagem.apellido}</strong><br>
-          Ocupação: ${personagem.ocupacion || "Desconhecida"}
+fetch("/personajes")
+  .then((res) => res.json())
+  .then((data) => {
+    data.simpsons.forEach((character) => {
+      const item = document.createElement("li");
+
+      // Cria estrutura inicial do card
+      item.innerHTML = `
+        <div class="card">
+          <img src="img/${character.nombre.toLowerCase()}.png" alt="${
+        character.nombre
+      }" class="character-img">
+          <div class="info">
+            <strong>${character.nombre} ${character.apellido}</strong><br>
+            Occupation: ${character.ocupacion || "Unknown"}<br>
+            <span class="frase">Carregando fala...</span>
+          </div>
         </div>
-      </div>
-    `;
-    lista.appendChild(item);
-  });
-});
+      `;
+
+      list.appendChild(item);
+
+      // Buscar a fala individual via /frases/:id
+      fetch(`/frases/${character.id}`)
+        .then((res) => res.json())
+        .then((dataFrase) => {
+          const fraseSpan = item.querySelector(".frase");
+          fraseSpan.innerText = `"${dataFrase.texto || "..."}"`;
+        })
+        .catch((err) => {
+          const fraseSpan = item.querySelector(".frase");
+          fraseSpan.innerText = "(fala indisponível)";
+          console.warn(`Erro ao buscar frase de ${character.nombre}:`, err);
+        });
+    });
+  })
+  .catch((err) => console.error("Erro ao carregar personagens:", err));
