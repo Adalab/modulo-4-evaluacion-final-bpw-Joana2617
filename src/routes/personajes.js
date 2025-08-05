@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { nombre, apellido, ocupacion, edad } = req.body;
+  const { nombre, apellido, ocupacion } = req.body;
 
   if (!nombre || !apellido) {
     return res.status(400).json({ error: "Nome e sobrenome são obrigatórios" });
@@ -28,15 +28,10 @@ router.post("/", async (req, res) => {
   try {
     const conn = await getConnection();
     const query = `
-      INSERT INTO personajes (nombre, apellido, ocupacion, edad)
-      VALUES (?, ?, ?, ?)
+      INSERT INTO personajes (nombre, apellido, ocupacion)
+      VALUES (?, ?, ?)
     `;
-    const [result] = await conn.execute(query, [
-      nombre,
-      apellido,
-      ocupacion,
-      edad,
-    ]);
+    const [result] = await conn.execute(query, [nombre, apellido, ocupacion]);
     await conn.end();
 
     res.status(201).json({ success: true, id: result.insertId });
