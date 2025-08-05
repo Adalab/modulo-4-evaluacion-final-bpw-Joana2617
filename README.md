@@ -52,6 +52,14 @@ Built with:
 
 https://simpsons-joana2617.onrender.com/
 
+## Localhost
+
+http://localhost:3000
+http://localhost:3000/characters.html
+http://localhost:3000/frases
+http://localhost:3000/personajes
+http://localhost:3000/capitulos
+
 Clients can consume the API by sending HTTP requests to each endpoint. All responses return relevant joined data for a smooth frontend experience.
 
 Sample usage:
